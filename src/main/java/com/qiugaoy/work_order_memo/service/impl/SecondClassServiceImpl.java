@@ -90,12 +90,18 @@ public class SecondClassServiceImpl implements SecondClassService {
             log.error(ResultEnum.SECOND_CLASS_ID_NOT_NULL.getCode() + "{}", secondClassId);
             throw new ResultException(ResultEnum.SECOND_CLASS_ID_NOT_NULL);
         }
-
-        SecondClass secondClass = secondClassDao.findById(secondClassId).get();
-        if (secondClass == null) {
-            log.error(ResultEnum.SECOND_CLASS_NOT_EXIST.getCode() + "{}", secondClassId);
+        SecondClass secondClass = null;
+        try {
+            secondClass = secondClassDao.findById(secondClassId).get();
+        }catch (Exception e){
+            log.error(ResultEnum.SECOND_CLASS_NOT_EXIST.getCode() + "--secondClassId:{} , e:{}", secondClassId,e.getMessage());
             throw new ResultException(ResultEnum.SECOND_CLASS_NOT_EXIST);
         }
+//         secondClass = secondClassDao.findById(secondClassId).get();
+//        if (secondClass == null) {
+//            log.error(ResultEnum.SECOND_CLASS_NOT_EXIST.getCode() + "{}", secondClassId);
+//            throw new ResultException(ResultEnum.SECOND_CLASS_NOT_EXIST);
+//        }
         return secondClass;
     }
 }

@@ -90,11 +90,18 @@ public class FirstClassServiceImpl implements FirstClassService {
             throw new ResultException(ResultEnum.FIRST_CLASS_ID_NOT_NULL);
         }
         //查询
-        FirstClass firstClass = firstClassDao.findById(firstClassId).get();
-        if (firstClass==null){
-            log.error(FirstClassEnum.FIRST_CLASS_NOT_EXIST.getMessage());
+        FirstClass firstClass=null;
+        try{ //findById 如果查询不到会抛异常
+            firstClass = firstClassDao.findById(firstClassId).get();
+        }catch (Exception e){
+            log.error(FirstClassEnum.FIRST_CLASS_NOT_EXIST.getMessage()+"{}",e.getMessage());
             throw new ResultException(ResultEnum.FIRST_CLASS_NOT_EXIST);
         }
+
+//        if (firstClass==null){
+//            log.error(FirstClassEnum.FIRST_CLASS_NOT_EXIST.getMessage());
+//            throw new ResultException(ResultEnum.FIRST_CLASS_NOT_EXIST);
+//        }
         return firstClass;
     }
 

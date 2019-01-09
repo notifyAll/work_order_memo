@@ -57,7 +57,7 @@ public class StoreServiceImpl implements StoreService {
         }
         //读取为空
         if (storeList == null || storeList.size() <= 0) {
-            log.error(ResultEnum.STORE_FILE_READ_FAIL.getCode() + " -- {} ", originalFilename);
+            log.error(ResultEnum.STORE_FILE_READ_FAIL.getCode() + " -- originalFilename: {} ", originalFilename);
             throw new ResultException(ResultEnum.STORE_FILE_READ_FAIL);
         }
 //     XX  删除原库 再保存  无需删除原库 直接保存 jpa会检测数据是否修改再保存
@@ -84,7 +84,7 @@ public class StoreServiceImpl implements StoreService {
         try {
              store = storeDao.findById(storeId).get();
         }catch (Exception e){
-            log.error(ResultEnum.STORE_NOT_EXIST.getCode() + " -- storeId : {} --" , storeId);
+            log.error(ResultEnum.STORE_NOT_EXIST.getCode() + " -- storeId : {}  e:{} --" , storeId,e.getMessage());
             throw new ResultException(ResultEnum.STORE_NOT_EXIST);
         }
 //        Store store = storeDao.findById(storeId).get();
