@@ -4,7 +4,7 @@ import com.qiugaoy.work_order_memo.converter.SecondClassForm2SecondClassConverte
 import com.qiugaoy.work_order_memo.dao.SecondClassDao;
 import com.qiugaoy.work_order_memo.entity.FirstClass;
 import com.qiugaoy.work_order_memo.entity.SecondClass;
-import com.qiugaoy.work_order_memo.enums.FirstClassEnum;
+import com.qiugaoy.work_order_memo.enums.ParamEnum;
 import com.qiugaoy.work_order_memo.enums.ResultEnum;
 import com.qiugaoy.work_order_memo.exception.ResultException;
 import com.qiugaoy.work_order_memo.from.SecondClassForm;
@@ -39,7 +39,7 @@ public class SecondClassServiceImpl implements SecondClassService {
     @Override
     public List<SecondClass> findAllByFirstClassId(Integer firstClassId) {
         if (firstClassId == null) {
-            log.error(FirstClassEnum.FIRST_CLASS_ID_NOT_NULL.getCode() + " -- firstClassId:{}", firstClassId);
+            log.error(ParamEnum.FIRST_CLASS_ID_NOT_NULL.getCode() + " -- firstClassId:{}", firstClassId);
             throw new ResultException(ResultEnum.FIRST_CLASS_ID_NOT_NULL);
         }
 

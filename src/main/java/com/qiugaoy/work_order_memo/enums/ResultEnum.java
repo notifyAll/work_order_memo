@@ -17,6 +17,9 @@ public enum  ResultEnum {
     STORE_FILE_NOT_XLSX("Store002","全门店信息非xlsx格式"),
     STORE_FILE_READ_FAIL("Store003","全门店信息表读取失败"),
     STORE_NOT_EXIST("Store004","门店不存在"),
+    USERS_ID_NOT_EXIST("U001","用户信息不存在"),
+    USERS_USERPASWORD_ERROR("U002","密码错误"),
+    USERS_USERSTART_ERROR("U003","用户状态异常"),
     SUCCSEE("R001","查询成功"),
     FAIL("R002","查询失败"),
     ;

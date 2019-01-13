@@ -5,7 +5,7 @@ import com.qiugaoy.work_order_memo.converter.FirstClassForm2FirstClassConverter;
 import com.qiugaoy.work_order_memo.dao.FirstClassDao;
 import com.qiugaoy.work_order_memo.dto.FirstClassDTO;
 import com.qiugaoy.work_order_memo.entity.FirstClass;
-import com.qiugaoy.work_order_memo.enums.FirstClassEnum;
+import com.qiugaoy.work_order_memo.enums.ParamEnum;
 import com.qiugaoy.work_order_memo.enums.ResultEnum;
 import com.qiugaoy.work_order_memo.exception.ResultException;
 import com.qiugaoy.work_order_memo.from.FirstClassForm;
@@ -62,7 +62,7 @@ public class FirstClassServiceImpl implements FirstClassService {
             firstClass = findByFirstClassId(firstClassForm.getFirstClassId());
             if (firstClass == null) {
 //                查询为空
-                log.error(FirstClassEnum.FIRST_CLASS_NOT_EXIST.getMessage() + firstClassForm.toString());
+                log.error(ResultEnum.FIRST_CLASS_NOT_EXIST.getMessage() + firstClassForm.toString());
                 throw new ResultException(ResultEnum.FIRST_CLASS_NOT_EXIST);
             }
             //拷贝数据  类型转换
@@ -86,7 +86,7 @@ public class FirstClassServiceImpl implements FirstClassService {
     @Override
     public FirstClass findByFirstClassId(Integer firstClassId) {
         if (firstClassId == null) {
-            log.error(FirstClassEnum.FIRST_CLASS_ID_NOT_NULL.getCode()+" -- firstClassId:{}",firstClassId);
+            log.error(ResultEnum.FIRST_CLASS_ID_NOT_NULL.getCode()+" -- firstClassId:{}",firstClassId);
             throw new ResultException(ResultEnum.FIRST_CLASS_ID_NOT_NULL);
         }
         //查询
@@ -94,12 +94,12 @@ public class FirstClassServiceImpl implements FirstClassService {
         try{ //findById 如果查询不到会抛异常
             firstClass = firstClassDao.findById(firstClassId).get();
         }catch (Exception e){
-            log.error(FirstClassEnum.FIRST_CLASS_NOT_EXIST.getMessage()+"{}",e.getMessage());
+            log.error(ResultEnum.FIRST_CLASS_NOT_EXIST.getMessage()+"{}",e.getMessage());
             throw new ResultException(ResultEnum.FIRST_CLASS_NOT_EXIST);
         }
 
 //        if (firstClass==null){
-//            log.error(FirstClassEnum.FIRST_CLASS_NOT_EXIST.getMessage());
+//            log.error(ParamEnum.FIRST_CLASS_NOT_EXIST.getMessage());
 //            throw new ResultException(ResultEnum.FIRST_CLASS_NOT_EXIST);
 //        }
         return firstClass;
