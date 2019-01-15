@@ -3,6 +3,7 @@ package com.qiugaoy.work_order_memo.controller;
 
 import com.qiugaoy.work_order_memo.VO.ResultVO;
 import com.qiugaoy.work_order_memo.entity.Users;
+import com.qiugaoy.work_order_memo.enums.ParamValue;
 import com.qiugaoy.work_order_memo.exception.ResultException;
 import com.qiugaoy.work_order_memo.from.UsersForm;
 import com.qiugaoy.work_order_memo.service.UsersService;
@@ -12,7 +13,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletContext;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -42,7 +45,7 @@ public class UsersController {
      * 登录
      */
     @GetMapping("/login")
-    public ResultVO login(HttpServletRequest request, HttpSession session, @Valid UsersForm usersForm) {
+    public ResultVO login(HttpServletRequest request, HttpServletResponse response, HttpSession session, @Valid UsersForm usersForm) {
         String requestedSessionId = request.getRequestedSessionId();
 //        System.out.println(requestedSessionId);
 //        HttpSession session = request.getSession();
@@ -54,10 +57,18 @@ public class UsersController {
             return  ResultVOUtil.error(e.getCode(),e.getMessage());
         }
 
+//        Cookie[] cookies = request.getCookies();
+        Cookie userId=new Cookie("userId",login.getUserId());
+        Cookie userPasword=new Cookie("userPasword",login.getUserPasword());
+        userId.setMaxAge(604800000); //七天
+        userPasword.setMaxAge(604800000);  //七天
 
-        session.setAttribute(login.getUserId(), login);
+//        response.set
+        response.addCookie(userId);
+        response.addCookie(userPasword);
 
-        
+        //放到session中
+        session.setAttribute(ParamValue.userSessionKey, login);
 
 //        session.setAttribute(requestedSessionId, "老王");
 

@@ -9,7 +9,7 @@ import java.util.List;
 
 @Data
 public class FirstClassDTO {
-     private Integer firstClassId;
+    private Integer firstClassId;
 
 
     private String firstClassName;
@@ -17,7 +17,7 @@ public class FirstClassDTO {
     /**
      * 分类状态 0禁用 1启用
      */
-    private Integer  firstClassStart;
+    private Integer firstClassStart;
 
     private Date createTime;
 
